@@ -7,8 +7,7 @@ from api.routes import create_routes
 
 # default mongodb configuration
 default_config = {
-    'UPLOAD_FOLDER': 'uploads', 
-    "SERVER_NAME": 'localhost:5000'}
+    'UPLOAD_FOLDER': 'uploads'}
 
 
 
@@ -33,3 +32,5 @@ if __name__ == '__main__':
     # Main entry point when run in stand-alone mode.
     app = get_flask_app()
     app.run(debug=True)
+else: 
+    app = get_flask_app()
