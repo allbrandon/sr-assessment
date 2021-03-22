@@ -1,31 +1,19 @@
 # flask packages
 from flask import Flask, app
 from flask_restx import Api
-from flask_mongoengine import MongoEngine
 
 # local packages
 from api.routes import create_routes
 
 # default mongodb configuration
-default_config = {'MONGODB_SETTINGS': {
-    'db': 'test_db',
-    'host': 'localhost',
-    'port': 27017,
-    'username': 'admin',
-    'password': 'password',
-    'authentication_source': 'admin'}, 
+default_config = {
     'UPLOAD_FOLDER': 'uploads', 
     "SERVER_NAME": 'localhost:5000'}
 
 
 
 def get_flask_app(config: dict = None) -> app.Flask:
-    """
-    Initializes Flask app with given configuration.
-    Main entry point for wsgi (gunicorn) server.
-    :param config: Configuration dictionary
-    :return: app
-    """
+
     # init flask
     flask_app = Flask(__name__)
 
@@ -37,8 +25,6 @@ def get_flask_app(config: dict = None) -> app.Flask:
     # init api and routes
     api = Api(app=flask_app)
     create_routes(api=api)
-    # init mongoengine
-    db = MongoEngine(app=flask_app)
 
     return flask_app
 
