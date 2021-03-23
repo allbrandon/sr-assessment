@@ -11,7 +11,6 @@ from PIL import Image
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'zip'}
-MYDIR = os.path.dirname(__file__)
 # check if the extension is part of the accepted set/has an extension
 def accepted_file(filename): 
     if '.' in filename and '/' not in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
@@ -25,14 +24,14 @@ def generateThumbnail(image, new_width, original_filename, prefix):
     new_height = new_width * height / width
     thumbnail = image.resize((new_width, int(round(new_height))))
     filename = prefix + original_filename
-    path = os.path.join(MYDIR + "/" + app.config['UPLOAD_FOLDER'], filename)
+    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     thumbnail.save(path)
 
     return filename
 # For uploading one image
 def uploadSingle(f, filename):
     images = {}
-    path = os.path.join(MYDIR + "/" + app.config['UPLOAD_FOLDER'], filename)
+    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     f.save(path)
 
     with Image.open(path) as img:
