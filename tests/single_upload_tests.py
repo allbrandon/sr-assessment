@@ -3,16 +3,16 @@ import os
 from PIL import Image
 import tempfile
 from flask import current_app as app
-
+url = "https://pure-hamlet-32179.herokuapp.com"
 def test_upload_picture_small_no_thumbnail():
     image = Image.new('RGB', size=(127, 127))
     file = tempfile.NamedTemporaryFile(suffix='.jpg')
     image.save(file)
     with open(file.name, 'rb') as f:
         files = {'file': f}
-        response = requests.post(f"http://{localhost:5000}/upload/",  files=files)
+        response = requests.post(f"{url}/upload/",  files=files)
     name = file.name.rsplit("/", 1)[1]
-    expected_link= f"http://localhost:5000/uploadedfiles/{name}"
+    expected_link= f"{url}/uploadedfiles/{name}"
     json_body = response.json()
 
     has_small_thumbnail = True 
